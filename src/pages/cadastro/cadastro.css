@@ -1,0 +1,81 @@
+.cadastro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.cadastro-container h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.logo {
+  color: #5a2d82;
+  font-weight: bold;
+}
+
+.cadastro-form {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 350px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color:#400748 ;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  background-color: #f7f2fa;
+}
+
+.termos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.btn-enviar {
+  background-color: #691e74;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.btn-enviar:hover {
+  background-color: #4b236b;
+}
+
+.login-link {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #5a2d82;
+  cursor: pointer;
+  text-align: center;
+}
