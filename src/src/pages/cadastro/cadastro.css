@@ -1,0 +1,121 @@
+.cadastro-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  font-family: Arial, sans-serif;
+}
+
+.cadastro-container h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.cadastro-title{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;                 /* espaço entre texto e logo */
+  font-size: 32px;           /* ajuste se quiser maior/menor */
+  font-weight: 700;
+  color: #1d0b2e;            /* pode usar #400748 se preferir mais roxo */
+  margin: 24px 0 28px;
+}
+
+.cadastro-title__logo{
+  height: 40px;              /* tamanho do logo no título */
+  width: auto;
+  transform: translateY(2px);/* alinha melhor a linha de base do texto */
+}
+
+.logo {
+  color: #5a2d82;
+  font-weight: bold;
+}
+
+.cadastro-form {
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 350px;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 500;
+  color:#400748 ;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  outline: none;
+  background-color: #f7f2fa;
+}
+
+.termos {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px 0;
+  font-size: 13px;
+  color: #555;
+}
+
+.btn-enviar {
+  background-color: #691e74;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+}
+
+.btn-enviar:hover {
+  background-color: #4b236b;
+}
+
+.voltar-login,
+.voltar-login a {
+  display: block;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #3b0066;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.voltar-login:hover,
+.voltar-login a:hover {
+  text-decoration: underline;
+}
+
+.login-link {
+  margin-top: 10px;
+  font-size: 13px;
+  color: #5a2d82;
+  cursor: pointer;
+  text-align: center;
+}
+
+@media (max-width: 768px){
+  .cadastro-title{ font-size: 24px; gap: 8px; margin: 18px 0 20px; }
+  .cadastro-title__logo{ height: 28px; }
+}
