@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/Alphyz/static/css/main.653c3c48.css",
-    "main.js": "/Alphyz/static/js/main.0e95052e.js",
-    "static/js/453.b0d58d6f.chunk.js": "/Alphyz/static/js/453.b0d58d6f.chunk.js",
+    "main.css": "/Alphyz/static/css/main.5628d149.css",
+    "main.js": "/Alphyz/static/js/main.f5287c28.js",
+    "static/js/453.cd9652ce.chunk.js": "/Alphyz/static/js/453.cd9652ce.chunk.js",
     "static/media/login-bg.jpg": "/Alphyz/static/media/login-bg.84491bb9a9afeee3458e.jpg",
     "static/media/logo.png": "/Alphyz/static/media/logo.4f5993899509b774429d.png",
+    "static/media/logobranco.png": "/Alphyz/static/media/logobranco.5a8cf17fc1c79eb0ad95.png",
     "index.html": "/Alphyz/index.html",
-    "main.653c3c48.css.map": "/Alphyz/static/css/main.653c3c48.css.map",
-    "main.0e95052e.js.map": "/Alphyz/static/js/main.0e95052e.js.map",
-    "453.b0d58d6f.chunk.js.map": "/Alphyz/static/js/453.b0d58d6f.chunk.js.map"
+    "main.5628d149.css.map": "/Alphyz/static/css/main.5628d149.css.map",
+    "main.f5287c28.js.map": "/Alphyz/static/js/main.f5287c28.js.map",
+    "453.cd9652ce.chunk.js.map": "/Alphyz/static/js/453.cd9652ce.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.653c3c48.css",
-    "static/js/main.0e95052e.js"
+    "static/css/main.5628d149.css",
+    "static/js/main.f5287c28.js"
   ]
 }
