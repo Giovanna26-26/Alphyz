@@ -1,45 +1,61 @@
+/* Layout base */
 .login-container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
+/* Coluna ESQUERDA: imagem de fundo */
 .login-left {
-  width: 50%;
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  flex: 1 1 55%;               /* ocupa ~55% */
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  min-height: 100%;
 }
 
-.logo {
-  width: 220px;
+/* (opcional) leve overlay p/ melhorar contraste */
+.login-left::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.18); /* ajuste 0–0.35 conforme o gosto */
+  pointer-events: none;
 }
 
-
+/* Coluna DIREITA: formulário */
 .login-right {
-  width: 50%;
+  flex: 0 0 45%;               /* ocupa ~45% */
   background-color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 24px 32px;
 }
 
+/* Formulário */
 .login-form {
-  width: 320px;
+  width: 100%;
+  max-width: 420px;            /* controla a largura do form */
   display: flex;
   flex-direction: column;
+}
+
+.login-logo {
+  display: block;
+  width: 180px;                /* ajuste o tamanho do logo aqui */
+  height: auto;
+  margin: 0 auto 8px;
 }
 
 .login-form h1 {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  color: #3b0066; 
-  margin-bottom: 20px;
+  color: #3b0066;
+  margin: 6px 0 18px;
 }
-
 
 .login-form label {
   font-size: 14px;
@@ -61,7 +77,6 @@
   box-shadow: 0 0 3px #6a0dad;
 }
 
-
 .links {
   display: flex;
   justify-content: space-between;
@@ -78,7 +93,6 @@
   text-decoration: underline;
 }
 
-
 .login-form button {
   background-color: #6a0dad;
   color: white;
@@ -92,4 +106,31 @@
 
 .login-form button:hover {
   background-color: #520b86;
+}
+
+/* Responsivo: no mobile esconda a imagem e use 100% para o form */
+@media (max-width: 900px){
+  .login-left { display: none; }
+
+  .login-container{
+    display: block;            /* coluna única */
+    min-height: 100vh;         /* fallback */
+    min-height: 100dvh;        /* viewport dinâmica */
+  }
+
+  .login-right{
+    width: 100%;
+    min-height: 100vh;         /* fallback */
+    min-height: 100dvh;        /* centraliza verticalmente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px 20px;
+    overflow-y: auto;          /* se o teclado subir, permite scroll */
+  }
+
+  .login-form{
+    max-width: 360px;          /* mais estreito no mobile */
+    margin: 0 auto;
+  }
 }

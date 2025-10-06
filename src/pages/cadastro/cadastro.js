@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "../cadastro/cadastro.css";
+import logo from "../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 export default function Cadastro() {
   const [formData, setFormData] = useState({
@@ -29,9 +31,11 @@ export default function Cadastro() {
 
   return (
     <div className="cadastro-container">
-      <h2>
-        Seja bem-vindo a !
-      </h2>
+      <h2 className="cadastro-title">
+  <span>Seja bem-vindo a</span>
+  <img src={logo} alt="alphyz" className="cadastro-title__logo" />
+  <span>!</span>
+</h2>
       <form onSubmit={handleSubmit} className="cadastro-form">
         <div className="col">
           <label>Nome completo:</label>
@@ -80,7 +84,9 @@ export default function Cadastro() {
             Enviar
           </button>
 
-          <p className="login-link">Já possuo conta (fazer login)</p>
+          <p className="voltar-login">
+  <Link to="/">Já possuo conta (fazer login)</Link>
+</p>
         </div>
       </form>
     </div>
