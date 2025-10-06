@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/giovanna26-26/Alphyz/static/css/main.653c3c48.css",
-    "main.js": "/giovanna26-26/Alphyz/static/js/main.15f88816.js",
-    "static/js/453.b0d58d6f.chunk.js": "/giovanna26-26/Alphyz/static/js/453.b0d58d6f.chunk.js",
-    "static/media/login-bg.jpg": "/giovanna26-26/Alphyz/static/media/login-bg.84491bb9a9afeee3458e.jpg",
-    "static/media/logo.png": "/giovanna26-26/Alphyz/static/media/logo.4f5993899509b774429d.png",
-    "index.html": "/giovanna26-26/Alphyz/index.html",
-    "main.653c3c48.css.map": "/giovanna26-26/Alphyz/static/css/main.653c3c48.css.map",
-    "main.15f88816.js.map": "/giovanna26-26/Alphyz/static/js/main.15f88816.js.map",
-    "453.b0d58d6f.chunk.js.map": "/giovanna26-26/Alphyz/static/js/453.b0d58d6f.chunk.js.map"
+    "main.css": "/Alphyz/static/css/main.653c3c48.css",
+    "main.js": "/Alphyz/static/js/main.0e95052e.js",
+    "static/js/453.b0d58d6f.chunk.js": "/Alphyz/static/js/453.b0d58d6f.chunk.js",
+    "static/media/login-bg.jpg": "/Alphyz/static/media/login-bg.84491bb9a9afeee3458e.jpg",
+    "static/media/logo.png": "/Alphyz/static/media/logo.4f5993899509b774429d.png",
+    "index.html": "/Alphyz/index.html",
+    "main.653c3c48.css.map": "/Alphyz/static/css/main.653c3c48.css.map",
+    "main.0e95052e.js.map": "/Alphyz/static/js/main.0e95052e.js.map",
+    "453.b0d58d6f.chunk.js.map": "/Alphyz/static/js/453.b0d58d6f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.653c3c48.css",
-    "static/js/main.15f88816.js"
+    "static/js/main.0e95052e.js"
   ]
 }
