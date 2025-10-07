@@ -1,3 +1,4 @@
+
 import React,{ useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../login/login.css";
@@ -65,4 +66,5 @@ export default function Login() {
       </div>
     </div>
   );
+
 }

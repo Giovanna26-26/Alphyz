@@ -1,42 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import "./home.css";
+import logo from "../../assets/logobranco.png";
 
-
-const Home = () => {
-  const [frame, setFrame] = useState(0);
-
-  // alterna entre frames automaticamente
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setFrame((prev) => (prev + 1) % 3);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
-
-  const frames = [
-    { background: "frame1" },
-    { background: "frame2" },
-    { background: "frame3" },
-  ];
-
+export default function Home() {
   return (
-    <div className={`home-container ${frames[frame].background}`}>
+    <div className="home-container">
+      {/* Logo */}
       <motion.div
-        key={frame}
-        initial={{ opacity: 0, x: frame % 2 === 0 ? -100 : 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1 }}
-        className="home-content"
+        className="logo-box"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
       >
-      
+        <img src={logo} alt="alphyz" className="logo-img" />
       </motion.div>
-       <div class="text-box">
-    O fast fashion criou um ciclo de consumo rápido: a gente compra, usa pouco e descarta. Isso polui o meio ambiente, gasta recursos e incentiva um jeito de viver insustentável. Precisamos mudar essa lógica!
-    A Alphyz é uma plataforma de economia criativa e moda sustentável baseada em trocas. Em vez de comprar sempre roupas novas, a pessoa pode circular peças, manter o estilo e ainda economizar. Nosso propósito vai além da moda, queremos criar uma comunidade que entende que consumir sem consciência esgota não só os recursos da Terra, mas também as possibilidades de futuro. 
-       </div>
+
+      {/* Texto */}
+      <motion.div
+        className="text-box"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.95, ease: "easeOut", delay: 0.2 }}
+      >
+        <p>
+          O fast fashion criou um ciclo de consumo rápido: a gente compra, usa pouco e
+          descarta. Isso polui o meio ambiente, gasta recursos e incentiva um jeito de
+          viver insustentável. Precisamos mudar essa lógica!
+        </p>
+        <p>
+          A Alphyz é uma plataforma de economia criativa e moda sustentável baseada em trocas.
+          Em vez de comprar sempre roupas novas, a pessoa pode circular peças, manter o estilo
+          e ainda economizar. Nosso propósito vai além da moda, queremos criar uma comunidade
+          que entende que consumir sem consciência esgota não só os recursos da Terra, mas
+          também as possibilidades de futuro.
+        </p>
+      </motion.div>
     </div>
   );
-};
-
-export default Home;
+}
