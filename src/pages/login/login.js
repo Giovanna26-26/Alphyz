@@ -1,10 +1,9 @@
 
-import React,{ useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "../login/login.css";
-import logo from "../../assets/logo.png";
-import bg from "../../assets/login-bg.jpg";
 
+import logoWhite from "../../assets/logobranco.png";   // logo branco (lado esquerdo)
 
 export default function Login() {
   const [login, setLogin] = useState("");
@@ -13,29 +12,21 @@ export default function Login() {
   const enviarFormulario = (e) => {
     e.preventDefault();
     console.log("Login:", login, "Senha:", senha);
-  
   };
-  const bgStyle = {
-  backgroundImage: `url(${bg})`,
-  backgroundSize: "cover",
-  backgroundPosition: "center",
-  backgroundRepeat: "no-repeat",
-  minHeight: "100vh",
-};
 
   return (
     <div className="login-container">
-      
-      <div className="login-left" style={bgStyle}>
-        
+      {/* COLUNA ESQUERDA: fundo escuro + logo centralizado */}
+      <div className="login-left">
+        <div className="left-brand">
+          <img src={logoWhite} alt="alphyz" className="left-logo" />
+        </div>
       </div>
 
-      
+      {/* COLUNA DIREITA: título no topo, formulário, links à esquerda e botão à direita */}
       <div className="login-right">
-        
         <form onSubmit={enviarFormulario} className="login-form">
-           <img src={logo} alt="Logo" className="login-logo" />
-          <h1>BEM-VINDO DE VOLTA!</h1>
+          <h1 className="login-title">BEM-VINDO DE VOLTA!</h1>
 
           <label>Login</label>
           <input
@@ -50,21 +41,17 @@ export default function Login() {
             value={senha}
             onChange={(e) => setSenha(e.target.value)}
           />
-          <div className="links">
 
+          {/* rodapé do formulário: links à esquerda, botão à direita */}
+          <div className="form-footer">
+            <div className="links">
+              <a href="#">Esqueci a senha</a>
+              <Link to="/cadastro">Ainda não sou cadastrado</Link>
+            </div>
+            <button type="submit" className="btn-primary">Enviar</button>
           </div>
-          <button type="submit">Enviar</button>
-
-
-          <div className="links">
-          <a href="#">Esqueci a senha</a>
-          <Link to="/cadastro">Ainda não sou cadastrado</Link>
-          </div>
-         
-
         </form>
       </div>
     </div>
   );
-
 }
