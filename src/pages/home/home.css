@@ -50,6 +50,7 @@ body {
   grid-column: 1;
   z-index: 1;
   justify-self: start;
+  margin-left: 90px;
 }
 
 .logo-img{
@@ -121,3 +122,4 @@ body {
     padding: 12px 14px;
   }
 }
+
