@@ -7,10 +7,10 @@ export default function Cadastro() {
   const [formData, setFormData] = useState({
     nome: "",
     telefone: "",
+    cep: "",
     rua: "",
     numero: "",
     complemento: "",
-    cep: "",
     estado: "",
     cidade: "",
     cpf: "",
@@ -22,10 +22,13 @@ export default function Cadastro() {
 
   const [estados, setEstados] = useState([]);
   const [cidades, setCidades] = useState([]);
+
   const [loadingEstados, setLoadingEstados] = useState(false);
   const [loadingCidades, setLoadingCidades] = useState(false);
+  const [loadingCEP, setLoadingCEP] = useState(false);
+  const [cepErro, setCepErro] = useState("");
 
-  // Fallback simples (caso a API falhe)
+  // Fallback simples (caso a API do IBGE falhe)
   const cidadesFallback = {
     SP: ["São Paulo", "Campinas", "Santos", "São José dos Campos", "Ribeirão Preto"],
     RJ: ["Rio de Janeiro", "Niterói", "Petrópolis", "Volta Redonda", "Campos dos Goytacazes"],
@@ -33,7 +36,7 @@ export default function Cadastro() {
     ES: ["Vitória", "Vila Velha", "Serra", "Cariacica", "Guarapari"],
   };
 
-  // Carrega estados ao montar
+  // Carrega ESTADOS (IBGE)
   useEffect(() => {
     const fetchEstados = async () => {
       try {
@@ -41,12 +44,10 @@ export default function Cadastro() {
         const res = await fetch(
           "https://servicodados.ibge.gov.br/api/v1/localidades/estados?orderBy=nome"
         );
-        const data = await res.json();
-        // data: [{id, sigla, nome}, ...]
+        const data = await res.json(); // [{id, sigla, nome}]
         setEstados(data);
-      } catch (e) {
-        console.error("Falha ao carregar estados do IBGE:", e);
-        // Fallback básico com o Sudeste
+      } catch {
+        // Sudeste como fallback
         setEstados([
           { sigla: "ES", nome: "Espírito Santo" },
           { sigla: "MG", nome: "Minas Gerais" },
@@ -60,7 +61,7 @@ export default function Cadastro() {
     fetchEstados();
   }, []);
 
-  // Quando mudar o estado, zera cidade e carrega novas
+  // Carrega CIDADES quando muda o ESTADO
   useEffect(() => {
     if (!formData.estado) {
       setCidades([]);
@@ -69,28 +70,82 @@ export default function Cadastro() {
     const fetchCidades = async () => {
       try {
         setLoadingCidades(true);
-        const uf = formData.estado; // ex.: "SP"
         const res = await fetch(
-          `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios?orderBy=nome`
+          `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${formData.estado}/municipios?orderBy=nome`
         );
-        const data = await res.json();
-        // data: [{id, nome}, ...]
-        setCidades(data.map((c) => c.nome));
-      } catch (e) {
-        console.error("Falha ao carregar cidades do IBGE:", e);
-        setCidades(cidadesFallback[formData.estado] || []);
+        const data = await res.json(); // [{id, nome}]
+        const nomes = data.map((c) => c.nome);
+        setCidades(nomes);
+
+        // Se já houver uma cidade setada (p.ex. vinda do CEP), mantém
+        // desde que exista na lista recém-carregada.
+        if (formData.cidade && !nomes.includes(formData.cidade)) {
+          setFormData((prev) => ({ ...prev, cidade: "" }));
+        }
+      } catch {
+        const nomes = cidadesFallback[formData.estado] || [];
+        setCidades(nomes);
       } finally {
         setLoadingCidades(false);
       }
     };
-    // limpa a cidade atual antes de carregar
-    setFormData((prev) => ({ ...prev, cidade: "" }));
     fetchCidades();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.estado]);
 
+  // Helpers CEP
+  const onlyDigits = (v) => v.replace(/\D/g, "");
+  const formatCEP = (v) => {
+    const d = onlyDigits(v).slice(0, 8);
+    if (d.length <= 5) return d;
+    return `${d.slice(0, 5)}-${d.slice(5)}`;
+  };
+
+  // Busca CEP na ViaCEP e preenche Rua/UF/Cidade
+  const lookupCEP = async (cepDigits) => {
+    if (cepDigits.length !== 8) return;
+    try {
+      setLoadingCEP(true);
+      setCepErro("");
+      const res = await fetch(`https://viacep.com.br/ws/${cepDigits}/json/`);
+      const data = await res.json();
+      if (data.erro) {
+        setCepErro("CEP não encontrado.");
+        return;
+      }
+
+      const uf = data.uf || "";
+      const cidade = data.localidade || "";
+      const rua = data.logradouro || "";
+
+      setFormData((prev) => ({
+        ...prev,
+        rua,
+        estado: uf,
+        cidade,
+      }));
+      // O efeito de "estado" carregará a lista de cidades;
+      // mantemos o valor já preenchido em 'cidade'.
+    } catch {
+      setCepErro("Não foi possível buscar o CEP. Tente novamente.");
+    } finally {
+      setLoadingCEP(false);
+    }
+  };
+
+  // Handlers
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
+    if (name === "cep") {
+      const digits = onlyDigits(value);
+      setFormData((prev) => ({ ...prev, cep: digits }));
+      // Busca automática ao atingir 8 dígitos
+      if (digits.length === 8) lookupCEP(digits);
+      else setCepErro("");
+      return;
+    }
+
     setFormData({ ...formData, [name]: type === "checkbox" ? checked : value });
   };
 
@@ -117,6 +172,23 @@ export default function Cadastro() {
           <label>Telefone</label>
           <input type="text" name="telefone" value={formData.telefone} onChange={handleChange} />
 
+          {/* CEP logo abaixo do telefone */}
+          <label>CEP</label>
+          <input
+            type="text"
+            name="cep"
+            value={formatCEP(formData.cep)}
+            onChange={handleChange}
+            onBlur={() => {
+              const d = onlyDigits(formData.cep);
+              if (d.length === 8) lookupCEP(d);
+            }}
+            placeholder="00000-000"
+          />
+          <small className={`hint ${cepErro ? "error" : ""}`}>
+            {loadingCEP ? "Buscando CEP..." : cepErro || "Preencha para autocompletar endereço"}
+          </small>
+
           <label>Rua</label>
           <input type="text" name="rua" value={formData.rua} onChange={handleChange} />
 
@@ -124,10 +196,12 @@ export default function Cadastro() {
           <input type="text" name="numero" value={formData.numero} onChange={handleChange} />
 
           <label>Complemento (Opcional)</label>
-          <input type="text" name="complemento" value={formData.complemento} onChange={handleChange} />
-
-          <label>CEP</label>
-          <input type="text" name="cep" value={formData.cep} onChange={handleChange} />
+          <input
+            type="text"
+            name="complemento"
+            value={formData.complemento}
+            onChange={handleChange}
+          />
         </div>
 
         {/* Coluna DIREITA */}
@@ -150,6 +224,7 @@ export default function Cadastro() {
                 ))}
               </select>
             </div>
+
             <div className="field">
               <label>Cidade</label>
               <select
