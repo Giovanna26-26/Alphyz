@@ -11,7 +11,7 @@ import org.bson.Document;
 
 public class MongoConnection {
     public static void main(String[] args) {
-        String connectionString = "mongodb+srv://karollima_db_user:jaTqmNVZhmLbneY7@cluster0.otbu5dk.mongodb.net/";
+         String connectionString = "process.env.connectionString";
 
         ServerApi serverApi = ServerApi.builder()
                 .version(ServerApiVersion.V1)
