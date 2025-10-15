@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../cadastro/cadastro.css";
-import logo from "../../assets/logo.png";
+import logocadastro from "../../assets/logocadastro.png";
 import { Link } from "react-router-dom";
 
 export default function Cadastro() {
@@ -158,9 +158,9 @@ export default function Cadastro() {
   return (
     <div className="cadastro-container">
       <h2 className="cadastro-title">
-        <span>Seja bem-vindo a</span>
-        <img src={logo} alt="alphyz" className="cadastro-title__logo" />
-        <span>!</span>
+        <span>Faça parte da nossa comunidade</span>
+        <img src={logocadastro} alt="alphyz" className="cadastro-title__logo" />
+        
       </h2>
 
       <form onSubmit={handleSubmit} className="cadastro-form">

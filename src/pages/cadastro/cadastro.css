@@ -23,9 +23,10 @@ body{
   margin: 24px 0 36px;
 }
 .cadastro-title__logo{
-  height:48px;
+  height: 48px;
   width:auto;
   transform: translateY(2px);
+  margin-bottom: 8px;
 }
 
 /* Grid 2 colunas com gap generoso */

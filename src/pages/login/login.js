@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../login/login.css";
 
-import logoWhite from "../../assets/logobranco.png";   // logo branco (lado esquerdo)
+import logoWhite from "../../assets/logobranco.png";   
 
 export default function Login() {
   const [login, setLogin] = useState("");
@@ -46,7 +46,7 @@ export default function Login() {
           <div className="form-footer">
             <div className="links">
               <a href="#">Esqueci a senha</a>
-              <Link to="/cadastro">Ainda não sou cadastrado</Link>
+              <Link to="/cadastro">Cadastre-se</Link>
             </div>
             <button type="submit" className="btn-primary">Enviar</button>
           </div>
